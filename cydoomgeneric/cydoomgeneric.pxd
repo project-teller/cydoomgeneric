@@ -1,3 +1,5 @@
+#cython: language_level=3
+
 """
  Copyright(C) 2023-2024 Wojciech Graj
 

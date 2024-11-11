@@ -1,0 +1,2 @@
+include ./cydoomgeneric/cydoomgeneric.pxd
+include ./doomgeneric/*.h

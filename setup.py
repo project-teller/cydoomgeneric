@@ -16,7 +16,6 @@
 import sys
 
 import numpy
-from Cython.Build import cythonize
 from setuptools import Extension, setup
 
 doom_src = (
@@ -114,16 +113,22 @@ else:
     define_macros.extend([("NORMALUNIX", None), ("LINUX", None),
                           ("_DEFAULT_SOURCE", None)])
 
-setup(ext_modules=cythonize([
-    Extension("cydoomgeneric",
-              sources=["./cydoomgeneric/cydoomgeneric.pyx"] +
-              [f"./doomgeneric/{src}" for src in doom_src],
-              include_dirs=["./doomgeneric",
-                            numpy.get_include()],
-              define_macros=define_macros,
-              extra_link_args=extra_link_args,
-              libraries=libraries),
-],
-                            language_level=3),
-      package_data={"cydoomgeneric": ["py.typed", "__init__.pyi"]},
-      packages=["cydoomgeneric"])
+ext = Extension(
+    "cydoomgeneric",
+    sources=(
+        [
+            "./cydoomgeneric/cydoomgeneric.pyx",
+        ] +
+        [f"./doomgeneric/{src}" for src in doom_src]
+    ),
+    include_dirs=["./doomgeneric", numpy.get_include()],
+    define_macros=define_macros,
+    extra_link_args=extra_link_args,
+    libraries=libraries
+)
+
+setup(
+    ext_modules=[ext],
+    package_data={"cydoomgeneric": ["py.typed", "__init__.pyi"]},
+    packages=["cydoomgeneric"]
+)

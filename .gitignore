@@ -9,4 +9,7 @@
 .savegame/
 __pycache__/
 build/
+dist/
 cydoomgeneric/cydoomgeneric.c
+uv.lock
+
