@@ -1,6 +1,8 @@
 name: Build
 
 on: [push, pull_request]
+env:
+  CIBW_SKIP: "cp36-* cp37-* cp38-* pp*"
 
 jobs:
   build_wheels:
